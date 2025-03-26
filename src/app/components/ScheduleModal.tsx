@@ -4,21 +4,42 @@ import React, { useState, useEffect } from 'react'
 import Select from './Select'
 import DatePicker from './DatePicker'
 
-interface ScheduleModalProps {
-  turma: string
-  day: string
-  time: string
-  onClose: () => void
-  onLessonAdded: (lesson: any) => void
+interface Lesson {
+    turma: string
+    day: string
+    time: string
+    subject: string
+    teacher: string
+    date: string
 }
+
+interface Subject {
+    id: string
+    name: string
+}
+
+interface Teacher {
+    id: string
+    name: string
+    subjects?: string[]
+}
+  
+  interface ScheduleModalProps {
+    turma: string
+    day: string
+    time: string
+    onClose: () => void
+    onLessonAdded: (lesson: Lesson) => void
+  }
+
 
 const ScheduleModal: React.FC<ScheduleModalProps> = ({ turma, day, time, onClose, onLessonAdded }) => {
   const [subject, setSubject] = useState<string>('')
   const [teacher, setTeacher] = useState<string>('')
   const [date, setDate] = useState<string>('')
 
-  const [subjects, setSubjects] = useState<any[]>([])
-  const [teachers, setTeachers] = useState<any[]>([])
+  const [subjects, setSubjects] = useState<Subject[]>([]);
+  const [teachers, setTeachers] = useState<Teacher[]>([]);
 
   useEffect(() => {
     // Busca as matérias

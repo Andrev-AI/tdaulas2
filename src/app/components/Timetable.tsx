@@ -1,9 +1,16 @@
 // src/app/components/Timetable.tsx
 import React from 'react'
 
+interface Lesson {
+    day: string
+    time: string
+    subject: string
+    teacher: string
+}
+
 interface TimetableProps {
-  schedule: any[]
-  onSlotClick: (day: string, time: string) => void
+    schedule: Lesson[]
+    onSlotClick: (day: string, time: string) => void
 }
 
 const days = ['Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta']
