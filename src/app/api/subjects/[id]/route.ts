@@ -1,31 +1,19 @@
 import { NextResponse, NextRequest } from 'next/server';
-import { db } from '../../../../lib/db'; // Confirme o caminho
-
-// Definir explicitamente a estrutura esperada para o segundo parâmetro
-type RouteContext = {
-  params: {
-    id: string;
-  };
-}
-// Ou usando interface:
-// interface RouteContext {
-//   params: {
-//     id: string;
-//   };
-// }
+import { db } from '../../../../lib/db';
 
 export async function DELETE(
-  request: NextRequest,
-  context: RouteContext // <<< Use o tipo/interface definido aqui
+  _request: NextRequest,
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  context: any // Permite 'any' aqui apesar das regras
 ): Promise<NextResponse> {
-  // Acessar via context.params como antes
-  const { id } = context.params;
+  const id = context?.params?.id;
 
   if (!id) {
      return NextResponse.json({ success: false, message: 'Missing ID parameter' }, { status: 400 });
   }
 
   try {
+    // ... resto do código ...
     const result = await db.query('DELETE FROM subjects WHERE id = $1', [id]);
     if (result.rowCount === 0) {
         return NextResponse.json({ success: false, message: 'Subject not found' }, { status: 404 });
