@@ -30,6 +30,9 @@ export async function POST(request: Request) {
 export async function GET(request: Request) {
   const { searchParams } = new URL(request.url)
   const turma = searchParams.get('turma')
+  if (!turma) {
+    return NextResponse.json({ error: 'Turma is required' }, { status: 400 })
+  }
   const result = await db.query(`SELECT * FROM lessons WHERE turma = $1`, [turma])
   return NextResponse.json(result.rows)
 }
