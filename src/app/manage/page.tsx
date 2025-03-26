@@ -2,9 +2,21 @@
 'use client'
 import React, { useState, useEffect } from 'react'
 
+interface Subject {
+    id: number
+    name: string
+  }
+  
+  interface Teacher {
+    id: number
+    name: string
+    // Adicione outras propriedades se necessário, como a lista de matérias
+  }
+      
+
 export default function Manage() {
-  const [subjects, setSubjects] = useState<any[]>([])
-  const [teachers, setTeachers] = useState<any[]>([])
+  const [subjects, setSubjects] = useState<Subject[]>([])
+  const [teachers, setTeachers] = useState<Teacher[]>([])    
   const [newSubject, setNewSubject] = useState<string>('')
   const [newTeacher, setNewTeacher] = useState<string>('')
 
@@ -77,7 +89,7 @@ export default function Manage() {
           {subjects.map((subject) => (
             <li key={subject.id} className="flex justify-between items-center">
               {subject.name}
-              <button onClick={() => deleteSubject(subject.id)} className="text-red-500">
+              <button onClick={() => deleteSubject(subject.id.toString())} className="text-red-500">
                 Excluir
               </button>
             </li>
@@ -103,7 +115,7 @@ export default function Manage() {
           {teachers.map((teacher) => (
             <li key={teacher.id} className="flex justify-between items-center">
               {teacher.name}
-              <button onClick={() => deleteTeacher(teacher.id)} className="text-red-500">
+              <button onClick={() => deleteTeacher(teacher.id.toString())} className="text-red-500">
                 Excluir
               </button>
             </li>

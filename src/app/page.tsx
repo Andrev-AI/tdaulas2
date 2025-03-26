@@ -4,11 +4,21 @@ import React, { useState, useEffect } from 'react'
 import Timetable from './components/Timetable'
 import ScheduleModal from './components/ScheduleModal'
 
+interface Lesson {
+  id: string
+  turma: string
+  day: string
+  time: string
+  subject: string
+  teacher: string
+  date: string
+}
+
 export default function Home() {
   const [turma, setTurma] = useState<string>('Turma A')
   const [modalOpen, setModalOpen] = useState<boolean>(false)
   const [selectedSlot, setSelectedSlot] = useState<{ day: string; time: string } | null>(null)
-  const [schedule, setSchedule] = useState<any[]>([])
+  const [schedule, setSchedule] = useState<Lesson[]>([])
 
   // Busca o agendamento da turma selecionada
   useEffect(() => {

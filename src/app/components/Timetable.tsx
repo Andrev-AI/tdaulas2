@@ -16,7 +16,6 @@ interface TimetableProps {
 const days = ['Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta']
 const startTime = 8
 const endTime = 17.5  // Até 17:30
-const lessonDuration = 55 // minutos
 
 // Gera os horários (simplificação: cada hora com início em :00)
 const generateTimeSlots = () => {
