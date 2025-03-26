@@ -1,4 +1,3 @@
-// src/app/page.tsx
 'use client'
 import React, { useState, useEffect } from 'react'
 import Timetable from './components/Timetable'
@@ -40,16 +39,22 @@ export default function Home() {
     setSelectedSlot(null)
   }
 
-  const handleLessonAdded = (newLesson: any) => {
-    // Atualiza o state com a nova aula agendada
-    setSchedule([...schedule, newLesson])
+  // Atualiza o state com a nova aula agendada, gerando o id internamente
+  // Agora o parâmetro lesson não precisa possuir a propriedade id
+  const handleLessonAdded = (lesson: Omit<Lesson, 'id'>) => {
+    const newLesson: Lesson = { ...lesson, id: String(Date.now()) }
+    setSchedule(prev => [...prev, newLesson])
   }
 
   return (
     <div>
       <div className="mb-4">
         <label className="mr-2">Selecione a Turma:</label>
-        <select value={turma} onChange={(e) => setTurma(e.target.value)} className="border p-2 rounded">
+        <select
+          value={turma}
+          onChange={(e) => setTurma(e.target.value)}
+          className="border p-2 rounded"
+        >
           <option value="Turma A">Turma A</option>
           <option value="Turma B">Turma B</option>
         </select>
